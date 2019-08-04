@@ -10,16 +10,53 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onCommand:extension.connect",
+		"onCommand:extension.disconnect",
+		"onCommand:extension.clear"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "extension.connect",
+				"title": "Serial Logger: Connect"
+			},
+			{
+				"command": "extension.disconnect",
+				"title": "Serial Logger: Disconnect"
+			},
+			{
+				"command": "extension.clear",
+				"title": "Serial Logger: Clear"
 			}
-		]
+	],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "extension.disconnect",
+					"group": "navigation",
+					"when": "resourceScheme == connected"
+				},
+				{
+					"command": "extension.connect",
+					"group": "navigation",
+					"when": "resourceScheme == disconnected"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "extension.disconnect",
+					"group": "navigation",
+					"when": "resourceScheme == connected"
+				},
+				{
+					"command": "extension.connect",
+					"group": "navigation",
+					"when": "resourceScheme == disconnected"
+				}
+			]
+
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
